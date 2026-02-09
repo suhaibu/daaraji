@@ -1,11 +1,13 @@
 
-import React from 'react';
-import { useParams, Link } from 'react-router-dom';
+import React, { useState } from 'react';
+import { useParams, Link, useNavigate } from 'react-router-dom';
 import { ResourceType, Language } from '../types';
 import { ICONS } from '../constants';
 
 const ResourceDetail: React.FC = () => {
   const { id } = useParams();
+  const navigate = useNavigate();
+  const [showDeleteConfirm, setShowDeleteConfirm] = useState(false);
 
   // Mock data fetching
   const resource = {
@@ -25,8 +27,41 @@ const ResourceDetail: React.FC = () => {
     pages: 45
   };
 
+  const handleDelete = () => {
+    // In a real app, call API to delete
+    alert('تم حذف المرجع بنجاح');
+    navigate('/library');
+  };
+
   return (
-    <div className="space-y-8 animate-fadeIn">
+    <div className="space-y-8 animate-fadeIn relative">
+      {/* Delete Confirmation Overlay */}
+      {showDeleteConfirm && (
+        <div className="fixed inset-0 bg-black/50 backdrop-blur-sm z-[100] flex items-center justify-center p-4">
+          <div className="bg-white rounded-2xl p-8 max-w-md w-full shadow-2xl animate-scaleIn">
+            <div className="w-16 h-16 bg-red-100 text-red-600 rounded-full flex items-center justify-center mx-auto mb-4">
+              <ICONS.Delete />
+            </div>
+            <h3 className="text-xl font-bold text-center text-stone-800 mb-2">تأكيد الحذف</h3>
+            <p className="text-stone-500 text-center mb-8">هل أنت متأكد من رغبتك في حذف هذا المرجع؟ لا يمكن التراجع عن هذه العملية.</p>
+            <div className="flex gap-4">
+              <button 
+                onClick={() => setShowDeleteConfirm(false)}
+                className="flex-1 px-4 py-3 rounded-xl font-bold text-stone-600 bg-stone-100 hover:bg-stone-200 transition-colors"
+              >
+                إلغاء
+              </button>
+              <button 
+                onClick={handleDelete}
+                className="flex-1 px-4 py-3 rounded-xl font-bold text-white bg-red-600 hover:bg-red-700 transition-colors shadow-lg shadow-red-600/20"
+              >
+                حذف نهائي
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
       <header className="flex justify-between items-center">
         <div>
           <nav className="flex items-center gap-2 text-stone-400 text-sm mb-2">
@@ -37,9 +72,19 @@ const ResourceDetail: React.FC = () => {
           <h1 className="text-3xl font-bold text-stone-800">{resource.title}</h1>
         </div>
         <div className="flex gap-3">
-          <button className="bg-stone-100 hover:bg-stone-200 text-stone-700 px-4 py-2 rounded-lg font-bold flex items-center gap-2 transition-colors">
-            تعديل
+          <button 
+            onClick={() => setShowDeleteConfirm(true)}
+            className="bg-red-50 hover:bg-red-100 text-red-600 px-4 py-2 rounded-lg font-bold flex items-center gap-2 transition-colors"
+          >
+            <ICONS.Delete />
+            حذف
           </button>
+          <Link 
+            to={`/edit/${id}`}
+            className="bg-stone-100 hover:bg-stone-200 text-stone-700 px-4 py-2 rounded-lg font-bold flex items-center gap-2 transition-colors"
+          >
+            تعديل
+          </Link>
           <button className="bg-emerald-700 hover:bg-emerald-800 text-white px-6 py-2 rounded-lg font-bold shadow-sm transition-all flex items-center gap-2">
              تحميل المرجع
           </button>

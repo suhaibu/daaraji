@@ -5,6 +5,7 @@ import Sidebar from './components/Sidebar';
 import Dashboard from './pages/Dashboard';
 import Library from './pages/Library';
 import AddResource from './pages/AddResource';
+import EditResource from './pages/EditResource';
 import ResourceDetail from './pages/ResourceDetail';
 
 const App: React.FC = () => {
@@ -18,6 +19,7 @@ const App: React.FC = () => {
               <Route path="/" element={<Dashboard />} />
               <Route path="/library" element={<Library />} />
               <Route path="/add" element={<AddResource />} />
+              <Route path="/edit/:id" element={<EditResource />} />
               <Route path="/resource/:id" element={<ResourceDetail />} />
             </Routes>
           </div>

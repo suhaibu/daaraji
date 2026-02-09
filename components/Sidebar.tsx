@@ -7,6 +7,8 @@ const Sidebar: React.FC = () => {
   const menuItems = [
     { name: 'الرئيسية', icon: <ICONS.Dashboard />, path: '/' },
     { name: 'المكتبة المركزية', icon: <ICONS.Library />, path: '/library' },
+    { name: 'إدارة التصنيفات', icon: <ICONS.Category />, path: '/categories' },
+    { name: 'منصة الباحثين', icon: <ICONS.Researcher />, path: '/research' },
     { name: 'إضافة مرجع', icon: <ICONS.Add />, path: '/add' },
   ];
 

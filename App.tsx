@@ -7,6 +7,8 @@ import Library from './pages/Library';
 import AddResource from './pages/AddResource';
 import EditResource from './pages/EditResource';
 import ResourceDetail from './pages/ResourceDetail';
+import Categories from './pages/Categories';
+import ResearcherPlatform from './pages/ResearcherPlatform';
 
 const App: React.FC = () => {
   return (
@@ -18,6 +20,8 @@ const App: React.FC = () => {
             <Routes>
               <Route path="/" element={<Dashboard />} />
               <Route path="/library" element={<Library />} />
+              <Route path="/categories" element={<Categories />} />
+              <Route path="/research" element={<ResearcherPlatform />} />
               <Route path="/add" element={<AddResource />} />
               <Route path="/edit/:id" element={<EditResource />} />
               <Route path="/resource/:id" element={<ResourceDetail />} />
